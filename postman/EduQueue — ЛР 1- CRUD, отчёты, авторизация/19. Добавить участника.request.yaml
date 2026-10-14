@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{baseUrl}}/api/entries"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "queueId": {{testQueueId}},
+      "userId": {{testUserId}},
+      "note": "Отчёт подготовлен"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("HTTP 201", () => pm.response.to.have.status(201));
+      pm.collectionVariables.set("testEntryId", pm.response.json().id);
+    language: text/javascript
+order: 19000

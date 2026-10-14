@@ -1,0 +1,27 @@
+$kind: http-request
+url: "{{baseUrl}}/api/queues"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "subject": "Программирование",
+      "title": "Тестовая защита ЛР 1",
+      "teacher": "Петров Пётр Петрович",
+      "groupName": "ТЕСТ-01",
+      "room": "305",
+      "note": "Тест коллекции Postman",
+      "opensAt": "{{opensAt}}",
+      "closesAt": null,
+      "startsAt": "{{startsAt}}",
+      "capacity": 10
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("HTTP 201", () => pm.response.to.have.status(201));
+      pm.collectionVariables.set("testQueueId", pm.response.json().queue.id);
+    language: text/javascript
+order: 13000

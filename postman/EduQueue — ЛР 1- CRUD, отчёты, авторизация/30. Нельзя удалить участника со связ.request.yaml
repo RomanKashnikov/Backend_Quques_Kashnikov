@@ -1,0 +1,9 @@
+$kind: http-request
+name: 30. Нельзя удалить участника со связями — 409
+url: "{{baseUrl}}/api/users/{{testUserId}}"
+method: DELETE
+scripts:
+  - type: afterResponse
+    code: pm.test("HTTP 409", () => pm.response.to.have.status(409));
+    language: text/javascript
+order: 30000

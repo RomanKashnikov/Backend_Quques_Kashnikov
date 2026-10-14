@@ -1,0 +1,30 @@
+$kind: http-request
+name: 12. User не может создавать очередь — 403
+url: "{{baseUrl}}/api/queues"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "subject": "Программирование",
+      "title": "Тестовая защита ЛР 1",
+      "teacher": "Петров Пётр Петрович",
+      "groupName": "ТЕСТ-01",
+      "room": "305",
+      "note": "Тест коллекции Postman",
+      "opensAt": "{{opensAt}}",
+      "closesAt": null,
+      "startsAt": "{{startsAt}}",
+      "capacity": 10
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{userToken}}"
+scripts:
+  - type: afterResponse
+    code: pm.test("HTTP 403", () => pm.response.to.have.status(403));
+    language: text/javascript
+order: 12000

@@ -1,0 +1,13 @@
+$kind: http-request
+name: "27. Отчёт: предметы"
+url: "{{baseUrl}}/api/reports/subjects"
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{userToken}}"
+scripts:
+  - type: afterResponse
+    code: pm.test("HTTP 200", () => pm.response.to.have.status(200));
+    language: text/javascript
+order: 27000

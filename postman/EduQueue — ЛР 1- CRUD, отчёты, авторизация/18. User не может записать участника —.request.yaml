@@ -1,0 +1,23 @@
+$kind: http-request
+name: 18. User не может записать участника — 403
+url: "{{baseUrl}}/api/entries"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "queueId": {{testQueueId}},
+      "userId": {{testUserId}},
+      "note": "Отчёт подготовлен"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{userToken}}"
+scripts:
+  - type: afterResponse
+    code: pm.test("HTTP 403", () => pm.response.to.have.status(403));
+    language: text/javascript
+order: 18000

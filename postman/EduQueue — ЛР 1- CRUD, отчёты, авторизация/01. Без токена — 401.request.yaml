@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{baseUrl}}/api/reports/queue-load"
+method: GET
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: pm.test("HTTP 401", () => pm.response.to.have.status(401));
+    language: text/javascript
+order: 1000

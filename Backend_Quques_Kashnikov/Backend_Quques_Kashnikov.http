@@ -1,0 +1,6 @@
+@Backend_Quques_Kashnikov_HostAddress = http://localhost:5046
+
+GET {{Backend_Quques_Kashnikov_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

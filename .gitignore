@@ -1,0 +1,11 @@
+.vs/
+**/bin/
+**/obj/
+**/App_Data/
+artifacts/
+*.user
+*.suo
+*.db
+*.db-shm
+*.db-wal
+*.key

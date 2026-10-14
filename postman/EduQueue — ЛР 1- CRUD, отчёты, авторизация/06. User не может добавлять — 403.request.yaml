@@ -1,0 +1,25 @@
+$kind: http-request
+url: "{{baseUrl}}/api/users"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "passNumber": "{{testPass}}",
+      "firstName": "Анна",
+      "lastName": "Тестовая",
+      "groupName": "ТЕСТ-01",
+      "role": "User",
+      "password": "Password123!"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{userToken}}"
+scripts:
+  - type: afterResponse
+    code: pm.test("HTTP 403", () => pm.response.to.have.status(403));
+    language: text/javascript
+order: 6000

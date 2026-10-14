@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{baseUrl}}/api/users"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "passNumber": "{{testPass}}",
+      "firstName": "Анна",
+      "lastName": "Тестовая",
+      "groupName": "ТЕСТ-01",
+      "role": "User",
+      "password": "Password123!"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("HTTP 201", () => pm.response.to.have.status(201));
+      pm.collectionVariables.set("testUserId", pm.response.json().id);
+    language: text/javascript
+order: 7000

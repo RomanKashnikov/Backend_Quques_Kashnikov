@@ -1,0 +1,13 @@
+$kind: collection
+name: "EduQueue — ЛР 1: CRUD, отчёты, авторизация"
+description: "Запускайте целиком сверху вниз. Создаёт тестовые данные и удаляет их в конце. Нужен запущенный API. Демонстрационные аккаунты: 100001 / Admin123! и 200001 / User123!."
+variables:
+  baseUrl: https://localhost:7187
+  adminToken: ""
+  userToken: ""
+auth:
+  - id: b1182a00-35b2-4a28-8808-b6572f008d25
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{adminToken}}"

@@ -1,0 +1,27 @@
+$kind: http-request
+url: "{{baseUrl}}/api/auth/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "passNumber": "100001",
+      "password": "Admin123!"
+    }
+auth:
+  type: noauth
+scripts:
+  - type: beforeRequest
+    code: |-
+      pm.collectionVariables.set("testPass", "test-" + Date.now());
+      pm.collectionVariables.set("opensAt", new Date(Date.now() - 3600000).toISOString());
+      pm.collectionVariables.set("startsAt", new Date(Date.now() + 86400000).toISOString());
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      pm.test("HTTP 200", () => pm.response.to.have.status(200));
+      pm.collectionVariables.set("adminToken", pm.response.json().accessToken);
+    language: text/javascript
+order: 2000

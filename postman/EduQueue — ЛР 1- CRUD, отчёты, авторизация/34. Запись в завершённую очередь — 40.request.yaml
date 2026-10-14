@@ -1,0 +1,19 @@
+$kind: http-request
+name: 34. Запись в завершённую очередь — 409
+url: "{{baseUrl}}/api/entries"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "queueId": {{testQueueId}},
+      "userId": {{testUserId}},
+      "note": "Отчёт подготовлен"
+    }
+scripts:
+  - type: afterResponse
+    code: pm.test("HTTP 409", () => pm.response.to.have.status(409));
+    language: text/javascript
+order: 34000

@@ -1,0 +1,16 @@
+$kind: http-request
+name: "25. Отчёт: заполненность"
+url: "{{baseUrl}}/api/reports/queue-load"
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{userToken}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("HTTP 200", () => pm.response.to.have.status(200));
+      const q = pm.response.json().find(q => q.id == pm.collectionVariables.get("testQueueId"));
+      pm.test("Осталось 9 мест", () => pm.expect(q.availablePlaces).to.eql(9));
+    language: text/javascript
+order: 25000

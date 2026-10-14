@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{baseUrl}}/api/users"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "passNumber": "{{testPass}}",
+      "firstName": "Анна",
+      "lastName": "Тестовая",
+      "groupName": "ТЕСТ-01",
+      "role": "User",
+      "password": "Password123!"
+    }
+scripts:
+  - type: afterResponse
+    code: pm.test("HTTP 409", () => pm.response.to.have.status(409));
+    language: text/javascript
+order: 8000

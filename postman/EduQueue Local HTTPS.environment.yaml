@@ -1,0 +1,4 @@
+name: EduQueue Local HTTPS
+values:
+  - key: baseUrl
+    value: 'https://localhost:7187'
